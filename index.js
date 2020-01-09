@@ -71,8 +71,10 @@ const fullName = document.querySelector('#fullname')
 const nameErr = document.querySelector('#nameerrormsg')
 const streetAddr = document.querySelector('#streetaddr')
 const addErr = document.querySelector('#addrerrormsg')
-const quant = document.querySelector('#quantity')
-const quantErr = document.querySelector('#quanterrormsg')
+const post = document.querySelector('#postcode')
+const postErr = document.querySelector('#posterrormsg')
+const postNumErr = document.querySelector('#postnumerrormsg')
+const postLenErr = document.querySelector('#postlenerrormsg')
 
 
 const submitForm = document.getElementById('submitform')
@@ -82,13 +84,20 @@ submitForm.addEventListener('submit', e => {
 })
 
 const checkForm = () => {
-  const isValid = fullName.value && streetAddr.value && quant.value
+  const isValid = fullName.value && streetAddr.value && !isNaN(post.value) && post.value.length <= 4
 
   nameErr.style.display = fullName.value ? 'none' : 'inline'
   addErr.style.display = streetAddr.value ? 'none' : 'inline'
-  quantErr.style.display = quant.value ? 'none' : 'inline'
+  postErr.style.display = post.value ? 'none' : 'inline'
+  postNumErr.style.display = isNaN(post.value) ? 'inline' : 'none'
+
+  if (post.value && !isNaN(post.value)) {
+    postLenErr.style.display = post.value.length < 4 ? 'none' : 'inline'
+  }
 
   if (isValid) {
-    fullName.value = streetAddr.value = quant.value = ''
+    fullName.value = streetAddr.value = post.value = ''
   }
+
+  return isValid
 }
