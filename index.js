@@ -1,19 +1,43 @@
+/*** PEEKABOO ELEMENTS ***/
+
 const emailpara = document.querySelector('#emailpara')
 
 emailpara.style.display = 'none'
 
 const toggleEmail = () => {
-  if (btn.checked) {
+  if (emailBtn.checked) {
     emailpara.style.display = 'inline'
   } else {
     emailpara.style.display = 'none'
   }
-  // emailpara.style.display
 }
 
-const btn = document.querySelector("#subscribe")
+const emailBtn = document.querySelector("#subscribe")
 
-btn.addEventListener('click', event => {
-  // event.preventDefault()
+emailBtn.addEventListener('click', event => {
   toggleEmail()
 })
+
+/*** POSTAL ADDRESS BOXES ***/
+
+const setHomeAddress = () => {
+  if (postalAddress.value && addressBtn.checked) {
+    homeAddress.value = postalAddress.value
+    homeAddress.disabled = true
+  } else {
+    homeAddress.value = ''
+    homeAddress.disabled = false
+  }
+}
+
+const addressBtn = document.querySelector("#homepostalcheck")
+
+const postalAddress = document.querySelector('#postaladdress')
+const homeAddress = document.querySelector('#homeaddress')
+
+addressBtn.addEventListener('click', event => {
+  setHomeAddress()
+})
+
+/*** RADIO BUTTONS ***/
+
