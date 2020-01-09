@@ -41,3 +41,20 @@ addressBtn.addEventListener('click', event => {
 
 /*** RADIO BUTTONS ***/
 
+const checkForm = () => {
+  const optStrawberry = document.querySelector('#optstraw')
+  const optBlue = document.querySelector('#optblue')
+
+  if (!optStrawberry.checked && !optBlue.checked) {
+    window.alert('Please select favorite berry!')
+    return false
+  }
+  return true
+}
+
+const mailToForm = document.querySelector('#mailtoform')
+
+mailToForm.addEventListener('submit', e => {
+  e.preventDefault()
+  checkForm()
+})
