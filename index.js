@@ -41,12 +41,12 @@ addressBtn.addEventListener('click', event => {
 
 /*** RADIO BUTTONS ***/
 
-const checkForm = () => {
+const checkRadioForm = () => {
   const optStrawberry = document.querySelector('#optstraw')
   const optBlue = document.querySelector('#optblue')
 
   if (!optStrawberry.checked && !optBlue.checked) {
-    window.alert('Please select favorite berry!')
+    // window.alert('Please select favorite berry!')
     return false
   }
   return true
@@ -56,5 +56,39 @@ const mailToForm = document.querySelector('#mailtoform')
 
 mailToForm.addEventListener('submit', e => {
   e.preventDefault()
+  checkRadioForm()
+})
+
+/*** BETTER INPUT VALIDATION ***/
+
+const errors = document.querySelectorAll('.errormsg')
+errors.forEach(error => {
+  error.style.color = 'red'
+  error.style.display = 'none'
+})
+
+const fullName = document.querySelector('#fullname')
+const nameErr = document.querySelector('#nameerrormsg')
+const streetAddr = document.querySelector('#streetaddr')
+const addErr = document.querySelector('#addrerrormsg')
+const quant = document.querySelector('#quantity')
+const quantErr = document.querySelector('#quanterrormsg')
+
+
+const submitForm = document.getElementById('submitform')
+submitForm.addEventListener('submit', e => {
+  e.preventDefault()
   checkForm()
 })
+
+const checkForm = () => {
+  const isValid = fullName.value && streetAddr.value && quant.value
+
+  nameErr.style.display = fullName.value ? 'none' : 'inline'
+  addErr.style.display = streetAddr.value ? 'none' : 'inline'
+  quantErr.style.display = quant.value ? 'none' : 'inline'
+
+  if (isValid) {
+    fullName.value = streetAddr.value = quant.value = ''
+  }
+}
