@@ -75,6 +75,8 @@ const post = document.querySelector('#postcode')
 const postErr = document.querySelector('#posterrormsg')
 const postNumErr = document.querySelector('#postnumerrormsg')
 const postLenErr = document.querySelector('#postlenerrormsg')
+const email = document.querySelector('#email2')
+const emailErr = document.querySelector('#emailerrormsg')
 
 
 const submitForm = document.getElementById('submitform')
@@ -84,20 +86,28 @@ submitForm.addEventListener('submit', e => {
 })
 
 const checkForm = () => {
-  const isValid = fullName.value && streetAddr.value && !isNaN(post.value) && post.value.length <= 4
+  let atPos = email.value.indexOf("@")
+  const isValid = fullName.value
+    && streetAddr.value
+    && !isNaN(post.value)
+    && post.value.length <= 4
+    && atPos >= 0
 
   nameErr.style.display = fullName.value ? 'none' : 'inline'
   addErr.style.display = streetAddr.value ? 'none' : 'inline'
   postErr.style.display = post.value ? 'none' : 'inline'
   postNumErr.style.display = isNaN(post.value) ? 'inline' : 'none'
+  emailErr.style.display = atPos < 0 ? 'inline' : 'none'
 
   if (post.value && !isNaN(post.value)) {
-    postLenErr.style.display = post.value.length < 4 ? 'none' : 'inline'
+    postLenErr.style.display = post.value.length <= 4 ? 'none' : 'inline'
   }
 
   if (isValid) {
-    fullName.value = streetAddr.value = post.value = ''
+    fullName.value = streetAddr.value = post.value = email.value = ''
   }
 
   return isValid
 }
+
+
